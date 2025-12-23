@@ -7572,6 +7572,15 @@ void NppParameters::feedScintillaParam(TiXmlNode *node)
 			_svp._lineCopyCutWithoutSelection = false;
 	}
 
+	nm = element->Attribute(L"enableDragDrop");
+	if (nm)
+	{
+		if (!lstrcmp(nm, L"yes"))
+			_svp._enableDragDrop = true;
+		else if (!lstrcmp(nm, L"no"))
+			_svp._enableDragDrop = false;
+	}
+
 	nm = element->Attribute(L"multiSelection");
 	if (nm)
 	{
@@ -7988,6 +7997,7 @@ bool NppParameters::writeScintillaParams()
 	(scintNode->ToElement())->SetAttribute(L"paddingRight", _svp._paddingRight);
 	(scintNode->ToElement())->SetAttribute(L"distractionFreeDivPart", _svp._distractionFreeDivPart);
 	(scintNode->ToElement())->SetAttribute(L"lineCopyCutWithoutSelection", _svp._lineCopyCutWithoutSelection ? L"yes" : L"no");
+	(scintNode->ToElement())->SetAttribute(L"enableDragDrop", _svp._enableDragDrop ? L"yes" : L"no");
 
 	(scintNode->ToElement())->SetAttribute(L"multiSelection", _svp._multiSelection ? L"yes" : L"no");
 	bool canEnableColumnSel2MultiEdit = _svp._multiSelection && _svp._columnSel2MultiEdit;
